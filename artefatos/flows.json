@@ -115,7 +115,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "G(s)",
-        "func": "\nreturn msg;",
+        "func": "// Função de Transferência: G(s) = 1.3885 * (20.223 / (s^2 + 3s + 20.223))\n\n// Parâmetros da função\nvar w_n = 4.4971;        // frequência natural amortecida\nvar zeta = 0.3346;       // coeciciente de amortecimento\nvar k = 1.3885;          // ganho natural do sistema\n\n// Entrada o sinal analógico\nvar input = msg.payload;\n\n// Cálculo da função de transferência\nvar s = (k * Math.pow(w_n, 2)) / (Math.pow(input, 2) + (2 * zeta * w_n * input) + Math.pow(w_n, 2));\n\n// Saída do sinal processado\nmsg.payload = s;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
