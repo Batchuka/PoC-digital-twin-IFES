@@ -7,6 +7,14 @@
         "info": ""
     },
     {
+        "id": "8b360dad8e8d15e9",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "4a37c9d30a2b9f7e",
         "type": "subflow",
         "name": "TCP-Controller-Server",
@@ -44,14 +52,14 @@
         "in": [
             {
                 "x": 280,
-                "y": 320,
+                "y": 140,
                 "wires": []
             }
         ],
         "out": [
             {
-                "x": 560,
-                "y": 320,
+                "x": 500,
+                "y": 140,
                 "wires": []
             }
         ],
@@ -60,7 +68,7 @@
         "color": "#DDAA99",
         "status": {
             "x": 380,
-            "y": 160,
+            "y": 140,
             "wires": []
         }
     },
@@ -72,7 +80,7 @@
         "category": "",
         "in": [
             {
-                "x": 340,
+                "x": 240,
                 "y": 220,
                 "wires": []
             }
@@ -89,11 +97,17 @@
         "color": "#DDAA99"
     },
     {
+        "id": "2e26a22fadbee511",
+        "type": "websocket-listener",
+        "path": "/ws/teste",
+        "wholemsg": "false"
+    },
+    {
         "id": "941b71e1ef8ad12b",
         "type": "subflow:4a37c9d30a2b9f7e",
         "z": "c2b5ea2567270cf2",
         "name": "",
-        "x": 560,
+        "x": 480,
         "y": 160,
         "wires": [
             []
@@ -104,7 +118,7 @@
         "type": "subflow:8adcfea88b97a313",
         "z": "c2b5ea2567270cf2",
         "name": "",
-        "x": 540,
+        "x": 480,
         "y": 300,
         "wires": [
             []
@@ -115,7 +129,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "G(s)",
-        "func": "// Função de Transferência: G(s) = 1.3885 * (20.223 / (s^2 + 3s + 20.223))\n\n// Parâmetros da função\nvar w_n = 4.4971;        // frequência natural amortecida\nvar zeta = 0.3346;       // coeciciente de amortecimento\nvar k = 1.3885;          // ganho natural do sistema\n\n// Entrada o sinal analógico\nvar input = msg.payload;\n\n// Cálculo da função de transferência\nvar s = (k * Math.pow(w_n, 2)) / (Math.pow(input, 2) + (2 * zeta * w_n * input) + Math.pow(w_n, 2));\n\n// Saída do sinal processado\nmsg.payload = s;\nreturn msg;",
+        "func": "\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -242,5 +256,37 @@
                 "d3a6c7caddb7711e"
             ]
         ]
+    },
+    {
+        "id": "e973e2e3a74cc53a",
+        "type": "websocket in",
+        "z": "8b360dad8e8d15e9",
+        "name": "websocket server",
+        "server": "2e26a22fadbee511",
+        "client": "",
+        "x": 400,
+        "y": 200,
+        "wires": [
+            [
+                "23669a32e76533a6"
+            ]
+        ]
+    },
+    {
+        "id": "23669a32e76533a6",
+        "type": "debug",
+        "z": "8b360dad8e8d15e9",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 200,
+        "wires": []
     }
 ]
