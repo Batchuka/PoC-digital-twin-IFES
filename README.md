@@ -7,3 +7,10 @@ O objetivo desse projeto é fornecer a base para construção de uma aplicação
 - explorar recursos e táticas de procolos de comunicação industrial para controle da planta através de simulação (o protocolo base é o modbus).
 
 
+# Definição de feito
+
+| Tarefa       | Concluída? |
+|--------------|------------|
+| Estudar      | [ ]        |
+| Fazer compras| [x]        |
+| Limpar a casa| [ ]        |
