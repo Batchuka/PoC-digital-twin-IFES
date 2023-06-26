@@ -7,14 +7,6 @@
         "info": ""
     },
     {
-        "id": "8b360dad8e8d15e9",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "4a37c9d30a2b9f7e",
         "type": "subflow",
         "name": "TCP-Controller-Server",
@@ -116,12 +108,6 @@
         }
     },
     {
-        "id": "2e26a22fadbee511",
-        "type": "websocket-listener",
-        "path": "/ws/teste",
-        "wholemsg": "false"
-    },
-    {
         "id": "941b71e1ef8ad12b",
         "type": "subflow:4a37c9d30a2b9f7e",
         "z": "c2b5ea2567270cf2",
@@ -147,58 +133,15 @@
         "id": "04c3b914430d2099",
         "type": "function",
         "z": "c2b5ea2567270cf2",
-        "name": "function 1",
+        "name": "controle discreto basico",
         "func": "// Lógica de Controle Discreto\nvar Kp = 0.3;  // Ganho Proporcional\nvar r = 10;    // Referência desejada\nvar y = msg.payload;  // Saída atual\n\nvar e = r - y;  // Erro (diferença entre a referência e a saída)\nvar u = Kp * e;  // Valor de controle\n\nmsg.payload = u;  // Atualiza o payload com o valor de controle\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 600,
+        "x": 590,
         "y": 240,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "d48a60aa865a84f0",
-        "type": "debug",
-        "z": "c2b5ea2567270cf2",
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 780,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "b3467ee9d7e778f3",
-        "type": "inject",
-        "z": "c2b5ea2567270cf2",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "5",
-        "payloadType": "num",
-        "x": 390,
-        "y": 360,
         "wires": [
             []
         ]
@@ -266,10 +209,12 @@
         "type": "subflow:c2b5ea2567270cf2",
         "z": "f6f2187d.f17ca8",
         "name": "C(s)",
-        "x": 550,
-        "y": 540,
+        "x": 610,
+        "y": 500,
         "wires": [
-            []
+            [
+                "49ea6012f0554b9e"
+            ]
         ]
     },
     {
@@ -291,12 +236,14 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "5",
-        "payloadType": "num",
-        "x": 330,
-        "y": 540,
+        "payload": "2",
+        "payloadType": "str",
+        "x": 370,
+        "y": 500,
         "wires": [
-            []
+            [
+                "01a3bb635a2279f6"
+            ]
         ]
     },
     {
@@ -306,45 +253,14 @@
         "name": "debug 5",
         "active": true,
         "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 800,
-        "y": 540,
-        "wires": []
-    },
-    {
-        "id": "e973e2e3a74cc53a",
-        "type": "websocket in",
-        "z": "8b360dad8e8d15e9",
-        "name": "websocket server",
-        "server": "2e26a22fadbee511",
-        "client": "",
-        "x": 400,
-        "y": 200,
-        "wires": [
-            [
-                "23669a32e76533a6"
-            ]
-        ]
-    },
-    {
-        "id": "23669a32e76533a6",
-        "type": "debug",
-        "z": "8b360dad8e8d15e9",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
         "console": true,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 690,
-        "y": 200,
+        "x": 850,
+        "y": 500,
         "wires": []
     }
 ]

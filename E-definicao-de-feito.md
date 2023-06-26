@@ -2,12 +2,12 @@
 
 > ## Parte 1 — POC: Testes de integração e arquitetura
 
-| Tarefa (prazo → 28/06/2023)                                      | Concluída? |
-| ---------------------------------------------------------------- | ---------- |
-| - Implementar uma função transferência básica no nodered         | [ ]        |
-| - Implementar um controlador básico no openplc                   | [ ]        |
-| - Estabelecer uma comunicação websocket entre nodered e openplc  | [ ]        |
-| - Garantir que a planta recebe comandos websocket do controlador | [ ]        |
+| Tarefa (prazo → 28/06/2023)                                                      | Concluída? |
+| -------------------------------------------------------------------------------- | ---------- |
+| - Implementar uma planta de controle discreto básica no nodered, standalone;     | [ ]        |
+| - Implementar uma lógica de controle discreto básica no openplc, standalone;     | [ ]        |
+| - Intregar openplc + nodered via websocket;                                      | [ ]        |
+| - Garantir correta interação entre openplc e nodered (envio de comandos básicos) | [ ]        |
 
 
 
@@ -15,10 +15,9 @@
 
 | Tarefa (prazo → 02/07/2023)                                                       | Concluída? |
 | --------------------------------------------------------------------------------- | ---------- |
+| - Garantir comunicação em protocolo modbus                                        | [ ]        |
 | - Implementar uma função transferência *real* no nodered                          | [ ]        |
 | - Implementar um controlador *real* no openplc                                    | [ ]        |
-| - Garantir que a planta é controlada pelo controlador                             | [ ]        |
-| - Implementar protocolo de comunicação modbus                                     | [ ]        |
 | - Garantir dados necessários para correta representação no Mango                  | [ ]        |
 | - Garantir documentação e procedimentos para construção de ambiente em containers | [ ]        |
 
