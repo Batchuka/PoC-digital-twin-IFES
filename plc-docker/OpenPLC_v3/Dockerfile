@@ -58,7 +58,7 @@ RUN ln -s /persistent/dnp3.cfg /workdir/webserver/dnp3.cfg
 # Cria um link simbólico de st_files na pasta /persistent para a pasta /workdir/webserver/st_files
 RUN ln -s /persistent/st_files /workdir/webserver/st_files
 
-EXPOSE 8080
+EXPOSE 8000
 
 # Define o comando de entrada do container como o arquivo start_openplc.sh presente na pasta /workdir
 ENTRYPOINT ["./webserver/scripts/start_openplc.sh"]

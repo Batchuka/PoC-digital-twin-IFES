@@ -1,1 +1,0 @@
-../../docker-custom/scripts/remove_native_gpio.sh

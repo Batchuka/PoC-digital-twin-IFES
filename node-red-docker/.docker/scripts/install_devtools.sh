@@ -1,1 +1,0 @@
-../../docker-custom/scripts/install_devtools.sh
