@@ -1,3 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 /node-red-docker.iml
 /.idea/
+
+/supervisorio-docker/free-m2m2-core-5.0.2.zip
