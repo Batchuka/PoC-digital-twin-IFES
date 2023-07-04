@@ -1,0 +1,247 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Planta",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "193ac271d1281c7a",
+        "type": "subflow",
+        "name": "Controlador",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 80,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "450dd3ddb5044a73"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 440,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "193ac271d1281c7a",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99",
+        "status": {
+            "x": 240,
+            "y": 60,
+            "wires": []
+        }
+    },
+    {
+        "id": "450dd3ddb5044a73",
+        "type": "debug",
+        "z": "193ac271d1281c7a",
+        "name": "Input",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 270,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "17139bcadc245558",
+        "type": "comment",
+        "z": "193ac271d1281c7a",
+        "name": "",
+        "info": "No controlador precisamos implementar comunicação WebSocket",
+        "x": 100,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "2c6f486eb1945c99",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Sinal de entrada",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "degrau unitário",
+        "payloadType": "str",
+        "x": 140,
+        "y": 240,
+        "wires": [
+            [
+                "91d1ece701207224",
+                "512c37958d8dfc23"
+            ]
+        ]
+    },
+    {
+        "id": "91d1ece701207224",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "input",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "e02831aed3632aad",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Função Transferência",
+        "func": "var math = require('mathjs');\n\nfunction transferFunction(msg) {\n    // Extrair os valores de w_n e zeta da mensagem recebida\n    var w_n = msg.w_n; // Frequência natural\n    var zeta = msg.zeta; // Coeficiente de amortecimento\n\n    // Calcular os coeficientes da função de transferência\n    var num = [17.997];\n    var den = [1, 2 * zeta * w_n, w_n * w_n + 18.073];\n\n    // Criar a função de transferência\n    var tf = math.tf(num, den);\n\n    // Calcular a resposta da função de transferência para um determinado valor de entrada\n    var input = 1; // Valor de entrada\n    var output = math.step(tf, input);\n\n    // Adicionar o valor de saída à mensagem de retorno\n    msg.payload = output;\n\n    return msg;\n}\n\nreturn transferFunction(msg);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 240,
+        "wires": [
+            [
+                "0a2c6ea298671d20",
+                "75ddf8ddff04e3bd",
+                "512c37958d8dfc23"
+            ]
+        ]
+    },
+    {
+        "id": "0a2c6ea298671d20",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "cc7f236f25fda431",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Distúrbio",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 140,
+        "wires": [
+            [
+                "e02831aed3632aad",
+                "8491870501ac8079"
+            ]
+        ]
+    },
+    {
+        "id": "732d37b74d929758",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Sinal de distúrbio",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "impulso",
+        "payloadType": "str",
+        "x": 160,
+        "y": 140,
+        "wires": [
+            [
+                "cc7f236f25fda431"
+            ]
+        ]
+    },
+    {
+        "id": "8491870501ac8079",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "perturbação",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "75ddf8ddff04e3bd",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "Sinal de saída",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "//alguma expressão para produzir o sinal",
+        "targetType": "jsonata",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "512c37958d8dfc23",
+        "type": "subflow:193ac271d1281c7a",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "e02831aed3632aad"
+            ]
+        ]
+    }
+]
