@@ -1,6 +1,8 @@
 # Introdução
 
-O objetivo desse projeto é fornecer a base para construção de uma aplicação que permita, principalmente, três coisas:
+O objetivo desse projeto é integrar o que seriam o três primeiros componentes convencionais da 'pirâmide de automação'
+
+
 
 - extrair empiricamente as características de um sistema dinâmico qualquer através de sua função transferência;
 - simular sintonizações de controle e compensação neste sistema (o que implica visualizar o resultado em um supervisório qualquer) e;
