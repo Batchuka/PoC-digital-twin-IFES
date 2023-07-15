@@ -1,6 +1,6 @@
-FROM amazoncorretto:17
+FROM ubuntu:jammy
 
-RUN yum update -y && yum install unzip curl -y
+RUN apt update -y && apt install unzip curl -y
 
 EXPOSE 8080
 
