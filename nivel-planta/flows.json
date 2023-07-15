@@ -1,0 +1,1119 @@
+[
+    {
+        "id": "13996fec88f9cde3",
+        "type": "tab",
+        "label": "Sistema",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "0030d4e1c6e9cfd3",
+        "type": "subflow",
+        "name": "Controlador",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 200,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "0b6132b288d88cc8"
+                    },
+                    {
+                        "id": "e3fa8730df5948e0"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 780,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "0b6132b288d88cc8",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "ki",
+                "type": "num",
+                "value": "0.1"
+            },
+            {
+                "name": "kp",
+                "type": "num",
+                "value": "0.1"
+            },
+            {
+                "name": "ti",
+                "type": "num",
+                "value": "5"
+            },
+            {
+                "name": "embarcado",
+                "type": "bool",
+                "value": "true"
+            },
+            {
+                "name": "sp",
+                "type": "num",
+                "value": "5"
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99",
+        "status": {
+            "x": 780,
+            "y": 320,
+            "wires": [
+                {
+                    "id": "0b6132b288d88cc8",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "3e50aea1eb84551d",
+        "type": "subflow",
+        "name": "TCP-Server",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 300,
+                "y": 300,
+                "wires": [
+                    {
+                        "id": "2bd746daecf2f3fd"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 760,
+                "y": 300,
+                "wires": [
+                    {
+                        "id": "2bd746daecf2f3fd",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "config1",
+                "type": "env",
+                "value": "config1"
+            },
+            {
+                "name": "config2",
+                "type": "env",
+                "value": "config2"
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99",
+        "status": {
+            "x": 760,
+            "y": 360,
+            "wires": [
+                {
+                    "id": "2bd746daecf2f3fd",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "2b60dfce9df272ff",
+        "type": "subflow",
+        "name": "TCP-Client",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 260,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "714596a6c31a946b"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99",
+        "status": {
+            "x": 720,
+            "y": 280,
+            "wires": [
+                {
+                    "id": "714596a6c31a946b",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "8eb87e2e9bbd3539",
+        "type": "subflow",
+        "name": "Planta",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 160,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "efd46c31ad21a399"
+                    },
+                    {
+                        "id": "d76165a3d490b852"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 880,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "dd225afbb2e8cce5",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "K",
+                "type": "num",
+                "value": "0.0143"
+            },
+            {
+                "name": "ts",
+                "type": "num",
+                "value": "63"
+            },
+            {
+                "name": "cv",
+                "type": "str",
+                "value": "1"
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99",
+        "status": {
+            "x": 880,
+            "y": 320,
+            "wires": [
+                {
+                    "id": "dd225afbb2e8cce5",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "0fa070e9bb174908",
+        "type": "subflow",
+        "name": "Feedback",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 180,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "0a25f19035de9e45"
+                    },
+                    {
+                        "id": "10977c0f54c02da4"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 740,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "0a25f19035de9e45",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99",
+        "status": {
+            "x": 740,
+            "y": 280,
+            "wires": [
+                {
+                    "id": "0a25f19035de9e45",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "5baa54ad799bab91",
+        "type": "subflow",
+        "name": "Entrada",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 340,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "b6371bd3201c2367"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 840,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "b6371bd3201c2367",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "cv",
+                "type": "num",
+                "value": "3"
+            },
+            {
+                "name": "vp",
+                "type": "str",
+                "value": "5"
+            },
+            {
+                "name": "ligar",
+                "type": "bool",
+                "value": "true"
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99",
+        "status": {
+            "x": 840,
+            "y": 320,
+            "wires": [
+                {
+                    "id": "b6371bd3201c2367",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "e50f034129f56be2",
+        "type": "subflow",
+        "name": "Saida",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 180,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "08899961395446bb"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99",
+        "status": {
+            "x": 660,
+            "y": 320,
+            "wires": [
+                {
+                    "id": "08899961395446bb",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "e2f2ba9b39854475",
+        "type": "websocket-listener",
+        "z": "3e50aea1eb84551d",
+        "path": "/ws/controle-planta",
+        "wholemsg": "false"
+    },
+    {
+        "id": "36f26500063fb23b",
+        "type": "subflow:3e50aea1eb84551d",
+        "z": "0030d4e1c6e9cfd3",
+        "d": true,
+        "name": "",
+        "x": 170,
+        "y": 340,
+        "wires": [
+            [
+                "0b6132b288d88cc8",
+                "5990e4523de6fbdc"
+            ]
+        ]
+    },
+    {
+        "id": "0b6132b288d88cc8",
+        "type": "function",
+        "z": "0030d4e1c6e9cfd3",
+        "name": "Função de controle 'PI' Discreto",
+        "func": "// obtenha o controle e o estado\nvar controle = global.get('controle');\nvar estado = global.get('estado');\n\n// Use o objeto controle para atualizar o estado ou realizar outras operações\nestado = controle.update(estado);\n\n// atualize o objeto estado globalmente\nglobal.set('estado', estado);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "class ControlePiEmbarcado {\n    constructor() {\n        // Converter para número usando parseFloat\n        this.kp = parseFloat(env.get('kp')); \n        this.ki = parseFloat(env.get('ki')); \n        this.ti = parseFloat(env.get('ti'));\n        this.sp = parseFloat(env.get('sp')); \n        this.integral = 0.0;\n        this.erroPassado = 0.0;\n    }\n\n    /**\n     * @param {{ sp: number; vp: number; sc: number; erro: number; }} estado\n     */\n    update(estado) {\n        var erro = this.sp - estado.vp;\n        this.integral += erro * this.ti;\n        // var derivative = (erro - this.erroPassado) / this.ti;\n        estado.sc = this.kp * erro + this.ki * this.integral;\n        estado.sp = this.sp;\n        this.erroPassado = erro;\n        return estado;\n    }\n}\n\nclass ControlePiRemoto {\n    constructor() {\n        // Converter para número usando parseFloat\n        this.kp = parseFloat(env.get('kp'));\n        this.ki = parseFloat(env.get('ki'));\n        this.ti = parseFloat(env.get('ti'));\n        this.sp = parseFloat(env.get('sp'));\n        this.integral = 0.0;\n        this.erroPassado = 0.0;\n    }\n\n    /**\n     * @param {{ sp: number; vp: number; sc: number; erro: number; }} estado\n     */\n    update(estado) {\n        // Lógica para controle remoto usando servidor TCP\n        // Implemente aqui a comunicação com o servidor TCP para obter o valor de controle remoto\n        // Atualize o estado.sc com o valor obtido do servidor TCP\n        return estado;\n    }\n}\n\nvar controle;\n\nif (env.get('embarcado')) {\n\n    controle = new ControlePiEmbarcado();\n\n\n} else if (!env.get('embarcado')) {\n\n    controle = new ControlePiRemoto();\n\n} else {\n    // Tipo de controle não reconhecido, defina um valor padrão ou trate o erro adequadamente\n    controle = null;\n}\n\n// Exporte o objeto controle para que possa ser acessado na aba \"on_message\"\nglobal.set('controle', controle);\n",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 260,
+        "wires": [
+            [
+                "f1f01d3d62f7b5d0"
+            ]
+        ]
+    },
+    {
+        "id": "f1f01d3d62f7b5d0",
+        "type": "debug",
+        "z": "0030d4e1c6e9cfd3",
+        "d": true,
+        "name": "Log → C(z) output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e3fa8730df5948e0",
+        "type": "debug",
+        "z": "0030d4e1c6e9cfd3",
+        "d": true,
+        "name": "Log → C(z) input",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 450,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "5990e4523de6fbdc",
+        "type": "debug",
+        "z": "0030d4e1c6e9cfd3",
+        "d": true,
+        "name": "Log → C(z) TCP Server",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "b6f934ea14369ef3",
+        "type": "websocket in",
+        "z": "3e50aea1eb84551d",
+        "d": true,
+        "name": "",
+        "server": "e2f2ba9b39854475",
+        "client": "",
+        "x": 220,
+        "y": 180,
+        "wires": [
+            [
+                "2bd746daecf2f3fd"
+            ]
+        ]
+    },
+    {
+        "id": "2bd746daecf2f3fd",
+        "type": "function",
+        "z": "3e50aea1eb84551d",
+        "name": "Consumir requisição",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8e19fffc995060b2",
+        "type": "tcp in",
+        "z": "3e50aea1eb84551d",
+        "d": true,
+        "name": "",
+        "server": "server",
+        "host": "",
+        "port": "8333",
+        "datamode": "stream",
+        "datatype": "buffer",
+        "newline": "",
+        "topic": "",
+        "trim": false,
+        "base64": false,
+        "tls": "",
+        "x": 260,
+        "y": 240,
+        "wires": [
+            [
+                "2bd746daecf2f3fd"
+            ]
+        ]
+    },
+    {
+        "id": "714596a6c31a946b",
+        "type": "function",
+        "z": "2b60dfce9df272ff",
+        "name": "Fazer requisição",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0f349c66eabdad8d",
+        "type": "websocket out",
+        "z": "2b60dfce9df272ff",
+        "name": "",
+        "x": 750,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "f1f144916f7f29fd",
+        "type": "tcp out",
+        "z": "2b60dfce9df272ff",
+        "name": "",
+        "host": "192.168.1.10",
+        "port": "8444",
+        "beserver": "client",
+        "base64": false,
+        "end": false,
+        "tls": "",
+        "x": 780,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "efd46c31ad21a399",
+        "type": "function",
+        "z": "8eb87e2e9bbd3539",
+        "name": "Função Transferência discreta",
+        "func": "// obter a planta e o estado\nvar estado = global.get('estado');\nvar planta = global.get('planta');\n\n// faça o update da planta\nmsg.payload = planta.update(estado);\n\n// acione o atuador da planta\nestado = planta.atuador(estado);\n\n// atualize o estado global do sistema\nglobal.set('estado', estado);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 2,
+        "initialize": "// equivalente ZOH para a planta\n\nclass Planta {\n    constructor() {\n        // Converter para número usando parseFloat\n        this.K = parseFloat(env.get('K'));\n        this.ts = parseFloat(env.get('ts'));\n        this.cv = parseFloat(env.get('cv'));\n    }\n\n    /**\n    * @param {{ vp: number; }} estado\n    */\n    update(estado) {\n        var vp = this.K * (this.cv + this.ts * estado.vp);\n        return vp;\n    }\n    /**\n     * @param {number} sc\n     * Uma lógica decente para o DAC ainda não será implementada\n     */\n    atuador(estado) {\n        // Simula o DAC arredondando para o valor inteiro mais próximo\n        var cv = Math.round(estado.sc);\n        this.cv = cv;\n        estado.cv = cv;\n        return estado;\n    }\n}\n\n// Criar uma instância da planta\nvar planta = new Planta();\nglobal.set('planta', planta);",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 260,
+        "wires": [
+            [
+                "dd225afbb2e8cce5"
+            ]
+        ]
+    },
+    {
+        "id": "054ca03eea1f92da",
+        "type": "debug",
+        "z": "8eb87e2e9bbd3539",
+        "d": true,
+        "name": "Log → G(z) output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "d76165a3d490b852",
+        "type": "debug",
+        "z": "8eb87e2e9bbd3539",
+        "d": true,
+        "name": "Log → G(z) input",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "dd225afbb2e8cce5",
+        "type": "delay",
+        "z": "8eb87e2e9bbd3539",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 680,
+        "y": 260,
+        "wires": [
+            [
+                "054ca03eea1f92da"
+            ]
+        ]
+    },
+    {
+        "id": "62c28d1c52a8a03c",
+        "type": "subflow:2b60dfce9df272ff",
+        "z": "0fa070e9bb174908",
+        "d": true,
+        "name": "",
+        "x": 790,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "0a25f19035de9e45",
+        "type": "function",
+        "z": "0fa070e9bb174908",
+        "name": "Função de Feedback",
+        "func": "// obtenha o sensor e o estado\nvar sensor = global.get('sensor');\nvar estado = global.get('estado');\n\n// faça aquisição da variável de processo\nestado.vp = sensor.aquisitar(msg.payload);\n\n\n// atualize o objeto estado globalmente\nglobal.set('estado', estado);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "class Sensor {\n    constructor() {\n        // futuramente, o sensor terá características\n        this.caracteristica = 0;\n    }\n\n    /**\n     * Retorna o valor atual do sensor\n     * @returns {number}\n     * Uma lógica decente para o ADC ainda não será implementada\n     */\n    aquisitar(vp) {\n         // Simula o ADC arredondando para o valor inteiro mais próximo\n        return Math.round(vp);\n    }\n}\n\n// Criar uma instância do sensor\nvar sensor = new Sensor();\nglobal.set('sensor', sensor);",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "62c28d1c52a8a03c",
+                "62d8eb71c36bce69"
+            ]
+        ]
+    },
+    {
+        "id": "10977c0f54c02da4",
+        "type": "debug",
+        "z": "0fa070e9bb174908",
+        "d": true,
+        "name": "Log → H(z) input",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "62d8eb71c36bce69",
+        "type": "debug",
+        "z": "0fa070e9bb174908",
+        "d": true,
+        "name": "Log → H(z) output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "b6371bd3201c2367",
+        "type": "function",
+        "z": "5baa54ad799bab91",
+        "name": "Função de input",
+        "func": "return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "var estado = {\n    cv: env.get('cv'),   // Valor inicial para 'cv'\n    vp: env.get('vp'),   // Valor inicial para 'vp'\n    sp: 0,   // Valor inicial para 'sp'\n    sc: 0,   // Valor inicial para 'sc'\n    erro: 0  // Valor inicial para 'erro'\n};\n\n\nglobal.set('estado', estado);",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 260,
+        "wires": [
+            [
+                "cc53c18766c96736"
+            ]
+        ]
+    },
+    {
+        "id": "0f965ce94347e129",
+        "type": "inject",
+        "z": "5baa54ad799bab91",
+        "name": "Estímulo",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 200,
+        "y": 200,
+        "wires": [
+            [
+                "b4cafe9708b8ad85"
+            ]
+        ]
+    },
+    {
+        "id": "d221b17dee62dfbc",
+        "type": "trigger",
+        "z": "5baa54ad799bab91",
+        "d": true,
+        "name": "",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "250",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 220,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b37a6c6f2a23c580",
+        "type": "comment",
+        "z": "5baa54ad799bab91",
+        "name": "Futuras implementações envolverão uso de estímulos degrau, rampa e parábola",
+        "info": "",
+        "x": 420,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "b4cafe9708b8ad85",
+        "type": "switch",
+        "z": "5baa54ad799bab91",
+        "name": "Ligar",
+        "property": "ligar",
+        "propertyType": "env",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 350,
+        "y": 200,
+        "wires": [
+            [
+                "b6371bd3201c2367",
+                "36720a1bc3791204"
+            ]
+        ]
+    },
+    {
+        "id": "36720a1bc3791204",
+        "type": "debug",
+        "z": "5baa54ad799bab91",
+        "d": true,
+        "name": "Log → U(z) input",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "cc53c18766c96736",
+        "type": "debug",
+        "z": "5baa54ad799bab91",
+        "d": true,
+        "name": "Log → U(z) output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "f2af8acebb922e0d",
+        "type": "debug",
+        "z": "e50f034129f56be2",
+        "name": "Log → Y(z) output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "08899961395446bb",
+        "type": "function",
+        "z": "e50f034129f56be2",
+        "name": "Função de saída",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 260,
+        "wires": [
+            [
+                "f2af8acebb922e0d",
+                "a01e5c7d34da0a66"
+            ]
+        ]
+    },
+    {
+        "id": "a01e5c7d34da0a66",
+        "type": "subflow:3e50aea1eb84551d",
+        "z": "e50f034129f56be2",
+        "d": true,
+        "name": "",
+        "x": 710,
+        "y": 400,
+        "wires": [
+            [
+                "c322d647ccaaef13"
+            ]
+        ]
+    },
+    {
+        "id": "c322d647ccaaef13",
+        "type": "debug",
+        "z": "e50f034129f56be2",
+        "d": true,
+        "name": "Log → Y(z) output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "bd063757ac044b4c",
+        "type": "subflow:8eb87e2e9bbd3539",
+        "z": "13996fec88f9cde3",
+        "name": "G(z)",
+        "env": [
+            {
+                "name": "cv",
+                "value": "0.5",
+                "type": "str"
+            }
+        ],
+        "x": 730,
+        "y": 300,
+        "wires": [
+            [
+                "fdd0aade4cb934d6",
+                "e967c56432fafe68"
+            ]
+        ]
+    },
+    {
+        "id": "4635caa8cec61577",
+        "type": "subflow:0030d4e1c6e9cfd3",
+        "z": "13996fec88f9cde3",
+        "name": "C(z)",
+        "env": [
+            {
+                "name": "ki",
+                "value": "0.063",
+                "type": "num"
+            },
+            {
+                "name": "kp",
+                "value": "1",
+                "type": "num"
+            },
+            {
+                "name": "ti",
+                "value": "27.54",
+                "type": "num"
+            },
+            {
+                "name": "sp",
+                "value": "10",
+                "type": "num"
+            },
+            {
+                "name": "ts",
+                "value": "2",
+                "type": "num"
+            }
+        ],
+        "x": 450,
+        "y": 300,
+        "wires": [
+            [
+                "bd063757ac044b4c"
+            ]
+        ]
+    },
+    {
+        "id": "e967c56432fafe68",
+        "type": "subflow:0fa070e9bb174908",
+        "z": "13996fec88f9cde3",
+        "name": "H(z)",
+        "x": 590,
+        "y": 500,
+        "wires": [
+            [
+                "4635caa8cec61577"
+            ]
+        ]
+    },
+    {
+        "id": "92dec6ec4e470693",
+        "type": "comment",
+        "z": "13996fec88f9cde3",
+        "name": " Sobre o objeto 'estado'",
+        "info": "# Sobre o objeto 'Estado'\n---\n\nTodos os nós desse sistema manipulam o mesmo objeto.\nSeu nome é 'Estado' e possui a seguinte estrutura:\n\n`var estado = {\n  vp: 0,   // valor da variável de processo (ex.: nível de água)\n  cv: 0,   // valor da variável de controle (ex.: fluxo de água)\n  sp: 0,   // valor do set point definido no controlador\n  sc: 0,   // sinal de controle expedido pelo controlador\n  erro: 0  // diferença entre variável de processo e set point;\n};`\n\nEm outras palavras, todos os nós atualizam o mesmo objeto através de\nsuas respectivas funções 'update'.\n\n\n",
+        "x": 580,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "4496263d07966851",
+        "type": "subflow:5baa54ad799bab91",
+        "z": "13996fec88f9cde3",
+        "name": "U(z)",
+        "env": [
+            {
+                "name": "cv",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "vp",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "ligar",
+                "value": "false",
+                "type": "bool"
+            },
+            {
+                "name": "sp",
+                "value": "5",
+                "type": "num"
+            }
+        ],
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "4635caa8cec61577",
+                "998057c1e3f8e4b8"
+            ]
+        ]
+    },
+    {
+        "id": "fdd0aade4cb934d6",
+        "type": "subflow:e50f034129f56be2",
+        "z": "13996fec88f9cde3",
+        "name": "Y(z)",
+        "x": 1030,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "998057c1e3f8e4b8",
+        "type": "function",
+        "z": "13996fec88f9cde3",
+        "d": true,
+        "name": "variaveis",
+        "func": "node.warn(\"Valor da variável 'estado': \" + JSON.stringify(global.get('estado')));",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "fd0b7ac00f063c32"
+            ]
+        ]
+    },
+    {
+        "id": "fd0b7ac00f063c32",
+        "type": "debug",
+        "z": "13996fec88f9cde3",
+        "d": true,
+        "name": "Log → Sistema",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "global.get('estado')",
+        "targetType": "jsonata",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "55fa9c4c8a2f537c",
+        "type": "comment",
+        "z": "13996fec88f9cde3",
+        "name": " Sobre o objeto 'planta'",
+        "info": "# Sobre o objeto 'planta'\n---\n...\n\n",
+        "x": 740,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "8c912221def14f4e",
+        "type": "comment",
+        "z": "13996fec88f9cde3",
+        "name": " Sobre o objeto 'controlador'",
+        "info": "# Sobre o objeto 'controlador'\n---\n...\n\n",
+        "x": 430,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "e075afba71614fde",
+        "type": "comment",
+        "z": "13996fec88f9cde3",
+        "name": " Sobre o objeto 'sensor'",
+        "info": "# Sobre o objeto 'sensor'\n---\n...\n\n",
+        "x": 580,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "dfe3751be61f97a6",
+        "type": "comment",
+        "z": "13996fec88f9cde3",
+        "name": " Sobre o objeto 'estimulo'",
+        "info": "# Sobre o objeto 'estimulo'\n---\n...\n\n",
+        "x": 110,
+        "y": 260,
+        "wires": []
+    }
+]

@@ -1,3 +1,0 @@
-[submodule "utils/ethercat_src"]
-	path = utils/ethercat_src
-	url = https://github.com/r2k-in-the-vortex/ethercat_src.git
