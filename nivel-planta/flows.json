@@ -97,7 +97,7 @@
         ],
         "out": [
             {
-                "x": 760,
+                "x": 800,
                 "y": 300,
                 "wires": [
                     {
@@ -107,22 +107,11 @@
                 ]
             }
         ],
-        "env": [
-            {
-                "name": "config1",
-                "type": "env",
-                "value": "config1"
-            },
-            {
-                "name": "config2",
-                "type": "env",
-                "value": "config2"
-            }
-        ],
+        "env": [],
         "meta": {},
         "color": "#DDAA99",
         "status": {
-            "x": 760,
+            "x": 800,
             "y": 360,
             "wires": [
                 {
@@ -364,6 +353,93 @@
         }
     },
     {
+        "id": "0271253ee34edd87",
+        "type": "subflow",
+        "name": "HTTP - Server",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 240,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "7766d3a83446d237"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 680,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "7766d3a83446d237",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "919f361b3949346a",
+        "type": "subflow",
+        "name": "modbus frame",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 300,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "0b36e2430729a715"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 740,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "0b36e2430729a715",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "deviceAddress",
+                "type": "str",
+                "value": ""
+            },
+            {
+                "name": "functionCode",
+                "type": "str",
+                "value": ""
+            },
+            {
+                "name": "startingAddress",
+                "type": "str",
+                "value": ""
+            },
+            {
+                "name": "quantity",
+                "type": "str",
+                "value": ""
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
         "id": "e2f2ba9b39854475",
         "type": "websocket-listener",
         "z": "3e50aea1eb84551d",
@@ -392,6 +468,7 @@
         "name": "Função de controle 'PI' Discreto",
         "func": "// obtenha o controle e o estado\nvar controle = global.get('controle');\nvar estado = global.get('estado');\n\n// Use o objeto controle para atualizar o estado ou realizar outras operações\nestado = controle.update(estado);\n\n// atualize o objeto estado globalmente\nglobal.set('estado', estado);\n\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "class ControlePiEmbarcado {\n    constructor() {\n        // Converter para número usando parseFloat\n        this.kp = parseFloat(env.get('kp')); \n        this.ki = parseFloat(env.get('ki')); \n        this.ti = parseFloat(env.get('ti'));\n        this.sp = parseFloat(env.get('sp')); \n        this.integral = 0.0;\n        this.erroPassado = 0.0;\n    }\n\n    /**\n     * @param {{ sp: number; vp: number; sc: number; erro: number; }} estado\n     */\n    update(estado) {\n        var erro = this.sp - estado.vp;\n        this.integral += erro * this.ti;\n        // var derivative = (erro - this.erroPassado) / this.ti;\n        estado.sc = this.kp * erro + this.ki * this.integral;\n        estado.sp = this.sp;\n        this.erroPassado = erro;\n        return estado;\n    }\n}\n\nclass ControlePiRemoto {\n    constructor() {\n        // Converter para número usando parseFloat\n        this.kp = parseFloat(env.get('kp'));\n        this.ki = parseFloat(env.get('ki'));\n        this.ti = parseFloat(env.get('ti'));\n        this.sp = parseFloat(env.get('sp'));\n        this.integral = 0.0;\n        this.erroPassado = 0.0;\n    }\n\n    /**\n     * @param {{ sp: number; vp: number; sc: number; erro: number; }} estado\n     */\n    update(estado) {\n        // Lógica para controle remoto usando servidor TCP\n        // Implemente aqui a comunicação com o servidor TCP para obter o valor de controle remoto\n        // Atualize o estado.sc com o valor obtido do servidor TCP\n        return estado;\n    }\n}\n\nvar controle;\n\nif (env.get('embarcado')) {\n\n    controle = new ControlePiEmbarcado();\n\n\n} else if (!env.get('embarcado')) {\n\n    controle = new ControlePiRemoto();\n\n} else {\n    // Tipo de controle não reconhecido, defina um valor padrão ou trate o erro adequadamente\n    controle = null;\n}\n\n// Exporte o objeto controle para que possa ser acessado na aba \"on_message\"\nglobal.set('controle', controle);\n",
         "finalize": "",
@@ -463,10 +540,10 @@
         "type": "websocket in",
         "z": "3e50aea1eb84551d",
         "d": true,
-        "name": "",
+        "name": "Websocket",
         "server": "e2f2ba9b39854475",
         "client": "",
-        "x": 220,
+        "x": 280,
         "y": 180,
         "wires": [
             [
@@ -478,17 +555,21 @@
         "id": "2bd746daecf2f3fd",
         "type": "function",
         "z": "3e50aea1eb84551d",
+        "d": true,
         "name": "Consumir requisição",
-        "func": "\nreturn msg;",
+        "func": "// Obtenha o objeto servidorPlanta do contexto global\nvar servidorPlanta = global.get(\"servidorPlanta\") || {};\n\nvar resultado = servidorPlanta.processarMensagem(msg);\nmsg.payload = resultado;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
-        "initialize": "",
+        "initialize": "// Defina a função apenas uma vez na aba 'on_Start'\nvar servidorPlanta = global.get(\"servidorPlanta\") || {};\nvar clientesOnline = global.get(\"clientesOnline\") || {};\n\n// Inicialize o objeto registroDeFuncoes com um valor predefinido\nvar registroDeFuncoes = global.get(\"registroDeFuncoes\") || { 'teste': 'deu certo' };\n\nservidorPlanta.processarMensagem = function (msg) {\n    var mensagemCliente = msg.payload.toString();\n    var listaDados = mensagemCliente.split(' ');\n\n    // Verifica se a mensagem possui a estrutura correta\n    if (listaDados.length !== 2) {\n        // Responde que a estrutura é inválida\n        return { payload: \"Estrutura inválida: \" + mensagemCliente };\n    }\n\n    var comando = listaDados[0].toLowerCase();\n    var argumentos = listaDados.slice(1);\n\n    // Verifica se o comando é reconhecido\n    if (comando === \"invocar_funcao\" && argumentos.length >= 1) {\n        // Invoca uma função\n        var nomeFuncao = argumentos[0];\n        var resposta = registroDeFuncoes[nomeFuncao];\n        if (resposta) {\n            return { payload: resposta };\n        } else {\n            return { payload: \"Função não encontrada: \" + nomeFuncao };\n        }\n    } if (comando === \"pool\") {\n        // retorna pool de conexões\n        return { payload: \"imagine que recebeu uma lista de clientes conectados\" };\n    } else {\n        // Comando desconhecido\n        return { payload: \"Comando desconhecido: \" + comando };\n    }\n};\n\n// Salve a função no contexto global\nservidorPlanta.processarMensagem = servidorPlanta.processarMensagem;\nglobal.set(\"clientesOnline\", clientesOnline);\nglobal.set(\"servidorPlanta\", servidorPlanta);",
         "finalize": "",
         "libs": [],
         "x": 540,
         "y": 300,
         "wires": [
-            []
+            [
+                "39765313d1edd60d"
+            ]
         ]
     },
     {
@@ -496,7 +577,7 @@
         "type": "tcp in",
         "z": "3e50aea1eb84551d",
         "d": true,
-        "name": "",
+        "name": "Socket TCP",
         "server": "server",
         "host": "",
         "port": "8333",
@@ -507,13 +588,31 @@
         "trim": false,
         "base64": false,
         "tls": "",
-        "x": 260,
+        "x": 270,
         "y": 240,
         "wires": [
             [
                 "2bd746daecf2f3fd"
             ]
         ]
+    },
+    {
+        "id": "39765313d1edd60d",
+        "type": "debug",
+        "z": "3e50aea1eb84551d",
+        "d": true,
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 240,
+        "wires": []
     },
     {
         "id": "714596a6c31a946b",
@@ -560,10 +659,12 @@
         "id": "efd46c31ad21a399",
         "type": "function",
         "z": "8eb87e2e9bbd3539",
+        "d": true,
         "name": "Função Transferência discreta",
         "func": "// obter a planta e o estado\nvar estado = global.get('estado');\nvar planta = global.get('planta');\n\n// faça o update da planta\nmsg.payload = planta.update(estado);\n\n// acione o atuador da planta\nestado = planta.atuador(estado);\n\n// atualize o estado global do sistema\nglobal.set('estado', estado);\n\nreturn msg;",
         "outputs": 1,
-        "noerr": 2,
+        "timeout": "",
+        "noerr": 0,
         "initialize": "// equivalente ZOH para a planta\n\nclass Planta {\n    constructor() {\n        // Converter para número usando parseFloat\n        this.K = parseFloat(env.get('K'));\n        this.ts = parseFloat(env.get('ts'));\n        this.cv = parseFloat(env.get('cv'));\n    }\n\n    /**\n    * @param {{ vp: number; }} estado\n    */\n    update(estado) {\n        var vp = this.K * (this.cv + this.ts * estado.vp);\n        return vp;\n    }\n    /**\n     * @param {number} sc\n     * Uma lógica decente para o DAC ainda não será implementada\n     */\n    atuador(estado) {\n        // Simula o DAC arredondando para o valor inteiro mais próximo\n        var cv = Math.round(estado.sc);\n        this.cv = cv;\n        estado.cv = cv;\n        return estado;\n    }\n}\n\n// Criar uma instância da planta\nvar planta = new Planta();\nglobal.set('planta', planta);",
         "finalize": "",
         "libs": [],
@@ -910,6 +1011,71 @@
         "wires": []
     },
     {
+        "id": "7766d3a83446d237",
+        "type": "function",
+        "z": "0271253ee34edd87",
+        "name": "function 1",
+        "func": "const http = require('http');\nconst request = require('request');\n\nconst server = http.createServer((req, res) => {\n  if (req.method === 'GET' && req.url === '/seuservico') {\n    // Fazer uma solicitação à API externa\n    request('URL_DA_API_EXTERN', (error, response, body) => {\n      if (!error && response.statusCode === 200) {\n        // Retornar os dados da API externa como resposta\n        res.writeHead(200, { 'Content-Type': 'application/json' });\n        res.end(body);\n      } else {\n        // Lidar com erros\n        res.writeHead(500, { 'Content-Type': 'text/plain' });\n        res.end('Erro ao acessar a API externa');\n      }\n    });\n  } else {\n    // Rota desconhecida\n    res.writeHead(404, { 'Content-Type': 'text/plain' });\n    res.end('Rota não encontrada');\n  }\n});\n\nconst PORT = 3000; // Porta em que o serviço será executado\nserver.listen(PORT, () => {\n  console.log(`Serviço REST em execução na porta ${PORT}`);\n});\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "51f0207fce76433a"
+            ]
+        ]
+    },
+    {
+        "id": "51f0207fce76433a",
+        "type": "http response",
+        "z": "0271253ee34edd87",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "58c7abd4d3ac7f6e",
+        "type": "http in",
+        "z": "0271253ee34edd87",
+        "name": "",
+        "url": "",
+        "method": "get",
+        "upload": false,
+        "x": 210,
+        "y": 280,
+        "wires": [
+            [
+                "7766d3a83446d237"
+            ]
+        ]
+    },
+    {
+        "id": "0b36e2430729a715",
+        "type": "function",
+        "z": "919f361b3949346a",
+        "name": "Modbus formatter",
+        "func": "// Extrair o payload da mensagem recebida\nvar payload = msg.payload;\n\n// capturar o frame instanciado no 'On Start'\nvar frame = global.get(env.get('frameName')); \n\n// Chamar o método transcribe do objeto frame para criar o quadro Modbus\nvar frameBuffer = frame.transcribe(payload);\n\n// Atualizar a mensagem de saída com o quadro Modbus\nmsg.payload = frameBuffer;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "/*\nVocê desejará formar tantos frames quanto houverem dispositivos em sua planta.\nCada dispositivo deve instanciar seus próprios objetos 'ModbusFrame'.\n*/\n\nclass ModbusFrame {\n    constructor() {\n        this.frameName = env.get('frameName');\n        this.deviceAddress = parseFloat(env.get('deviceAddress'));\n        this.functionCode = parseFloat(env.get('functionCode'));\n        this.startingAddress = parseFloat(env.get('startingAddress'));\n        this.quantity = parseFloat(env.get('quantity'));\n        this.buffer = Buffer.alloc(8); // Um quadro Modbus geralmente tem 8 bytes\n    }\n\n\n    transcribe(payload) {\n        /*\n        A função transcribe é reposnsável por buscar os atributos básicos do objeto ModbusFrame,\n        formata-los no frame padrão e adicionar a mensagem que vier do payload.\n        */\n        this.buffer.writeUInt8(this.deviceAddress, 0);   // Endereço do dispositivo\n        this.buffer.writeUInt8(this.functionCode, 1);    // Código da função\n        this.buffer.writeUInt16BE(this.startingAddress, 2); // Endereço de início dos registros (big-endian)\n        this.buffer.writeUInt16BE(this.quantity, 4);     // Quantidade de registros (big-endian)\n        // aqui deve haver um espaço para guardar a informação própriamente dita\n    }\n}\n\n// Obtenha o nome do quadro a partir do ambiente\nconst frameName = env.get('frameName');\n\n// Crie uma instância da classe ModbusFrame usando o nome do quadro como argumento\nconst modbusFrame = new ModbusFrame();\n\n// Exporte o objeto controle para que possa ser acessado na aba \"on_message\"\nglobal.set(frameName, modbusFrame);",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "bd063757ac044b4c",
         "type": "subflow:8eb87e2e9bbd3539",
         "z": "13996fec88f9cde3",
@@ -921,8 +1087,8 @@
                 "type": "str"
             }
         ],
-        "x": 730,
-        "y": 300,
+        "x": 890,
+        "y": 280,
         "wires": [
             [
                 "fdd0aade4cb934d6",
@@ -962,8 +1128,8 @@
                 "type": "num"
             }
         ],
-        "x": 450,
-        "y": 300,
+        "x": 610,
+        "y": 280,
         "wires": [
             [
                 "bd063757ac044b4c"
@@ -975,8 +1141,8 @@
         "type": "subflow:0fa070e9bb174908",
         "z": "13996fec88f9cde3",
         "name": "H(z)",
-        "x": 590,
-        "y": 500,
+        "x": 750,
+        "y": 480,
         "wires": [
             [
                 "4635caa8cec61577"
@@ -989,8 +1155,8 @@
         "z": "13996fec88f9cde3",
         "name": " Sobre o objeto 'estado'",
         "info": "# Sobre o objeto 'Estado'\n---\n\nTodos os nós desse sistema manipulam o mesmo objeto.\nSeu nome é 'Estado' e possui a seguinte estrutura:\n\n`var estado = {\n  vp: 0,   // valor da variável de processo (ex.: nível de água)\n  cv: 0,   // valor da variável de controle (ex.: fluxo de água)\n  sp: 0,   // valor do set point definido no controlador\n  sc: 0,   // sinal de controle expedido pelo controlador\n  erro: 0  // diferença entre variável de processo e set point;\n};`\n\nEm outras palavras, todos os nós atualizam o mesmo objeto através de\nsuas respectivas funções 'update'.\n\n\n",
-        "x": 580,
-        "y": 80,
+        "x": 720,
+        "y": 60,
         "wires": []
     },
     {
@@ -1020,8 +1186,8 @@
                 "type": "num"
             }
         ],
-        "x": 130,
-        "y": 300,
+        "x": 290,
+        "y": 280,
         "wires": [
             [
                 "4635caa8cec61577",
@@ -1034,8 +1200,8 @@
         "type": "subflow:e50f034129f56be2",
         "z": "13996fec88f9cde3",
         "name": "Y(z)",
-        "x": 1030,
-        "y": 300,
+        "x": 1190,
+        "y": 280,
         "wires": []
     },
     {
@@ -1050,8 +1216,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 340,
-        "y": 200,
+        "x": 500,
+        "y": 180,
         "wires": [
             [
                 "fd0b7ac00f063c32"
@@ -1072,8 +1238,8 @@
         "targetType": "jsonata",
         "statusVal": "",
         "statusType": "auto",
-        "x": 510,
-        "y": 200,
+        "x": 670,
+        "y": 180,
         "wires": []
     },
     {
@@ -1082,8 +1248,8 @@
         "z": "13996fec88f9cde3",
         "name": " Sobre o objeto 'planta'",
         "info": "# Sobre o objeto 'planta'\n---\n...\n\n",
-        "x": 740,
-        "y": 260,
+        "x": 900,
+        "y": 240,
         "wires": []
     },
     {
@@ -1092,8 +1258,8 @@
         "z": "13996fec88f9cde3",
         "name": " Sobre o objeto 'controlador'",
         "info": "# Sobre o objeto 'controlador'\n---\n...\n\n",
-        "x": 430,
-        "y": 260,
+        "x": 590,
+        "y": 240,
         "wires": []
     },
     {
@@ -1102,8 +1268,8 @@
         "z": "13996fec88f9cde3",
         "name": " Sobre o objeto 'sensor'",
         "info": "# Sobre o objeto 'sensor'\n---\n...\n\n",
-        "x": 580,
-        "y": 560,
+        "x": 740,
+        "y": 440,
         "wires": []
     },
     {
@@ -1112,8 +1278,144 @@
         "z": "13996fec88f9cde3",
         "name": " Sobre o objeto 'estimulo'",
         "info": "# Sobre o objeto 'estimulo'\n---\n...\n\n",
-        "x": 110,
-        "y": 260,
+        "x": 270,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "5416a33416f78568",
+        "type": "subflow:3e50aea1eb84551d",
+        "z": "13996fec88f9cde3",
+        "name": "Teste TCP Server",
+        "x": 510,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7b1eddc39fd735b0",
+        "type": "tcp in",
+        "z": "13996fec88f9cde3",
+        "name": "Socket TCP",
+        "server": "server",
+        "host": "",
+        "port": "8333",
+        "datamode": "stream",
+        "datatype": "buffer",
+        "newline": "",
+        "topic": "",
+        "trim": false,
+        "base64": false,
+        "tls": "",
+        "x": 490,
+        "y": 620,
+        "wires": [
+            [
+                "f19f65e122f89093"
+            ]
+        ]
+    },
+    {
+        "id": "f19f65e122f89093",
+        "type": "debug",
+        "z": "13996fec88f9cde3",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "d9860d87780af8fe",
+        "type": "subflow:919f361b3949346a",
+        "z": "13996fec88f9cde3",
+        "name": "Teste Modbus",
+        "x": 500,
+        "y": 680,
+        "wires": [
+            [
+                "2afd322d5d4d9974",
+                "21b441c366345770"
+            ]
+        ]
+    },
+    {
+        "id": "96a18539eeca229c",
+        "type": "subflow:0271253ee34edd87",
+        "z": "13996fec88f9cde3",
+        "name": "Teste HTTP Server",
+        "x": 510,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "572c1e99b4b07d31",
+        "type": "debug",
+        "z": "13996fec88f9cde3",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "21b441c366345770",
+        "type": "debug",
+        "z": "13996fec88f9cde3",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "8cace39cb35b503e",
+        "type": "debug",
+        "z": "13996fec88f9cde3",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "2afd322d5d4d9974",
+        "type": "subflow:2b60dfce9df272ff",
+        "z": "13996fec88f9cde3",
+        "name": "Teste TPC Cliente",
+        "x": 750,
+        "y": 680,
         "wires": []
     }
 ]

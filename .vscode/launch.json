@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Boca",
+            "type": "python",
+            "request": "launch",
+            "program": "C:\\Users\\Mathe\\projetos\\PoC-digital-twin-IFES\\cliente\\boca.py",
+            "console": "integratedTerminal",
+            "args": ["-u", "Matheus"],
+            "justMyCode": true
+        }
+    ]
+}
