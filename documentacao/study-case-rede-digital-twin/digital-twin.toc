@@ -1,0 +1,23 @@
+\contentsline {section}{\numberline {1}Introdução e Justificativa}{1}{}%
+\contentsline {section}{\numberline {2}Objetivos}{1}{}%
+\contentsline {section}{\numberline {3}Material e Métodos}{1}{}%
+\contentsline {section}{\numberline {4}Resultados e Discussão}{1}{}%
+\contentsline {subsection}{\numberline {4.1}Conjunto de Dados da Universidade de Paderborn}{1}{}%
+\contentsline {subsubsection}{\numberline {4.1.1}Descrição do Conjunto de Dados}{1}{}%
+\contentsline {subsubsection}{\numberline {4.1.2}Análise Estatística Descritiva}{1}{}%
+\contentsline {subsection}{\numberline {4.2}Domínio Wavelet}{1}{}%
+\contentsline {subsubsection}{\numberline {4.2.1}Conceitos Fundamentais de Wavelet}{1}{}%
+\contentsline {subsubsection}{\numberline {4.2.2}Aplicação no Contexto deste Estudo}{2}{}%
+\contentsline {subsection}{\numberline {4.3}Implementação de Algoritmos de Aprendizado de Máquina}{2}{}%
+\contentsline {subsubsection}{\numberline {4.3.1}Preparação dos Dados}{2}{}%
+\contentsline {subsubsection}{\numberline {4.3.2}Implementação de Algoritmos}{2}{}%
+\contentsline {paragraph}{Support Vector Machine (SVM)}{2}{}%
+\contentsline {paragraph}{k-Nearest Neighbors (KNN)}{2}{}%
+\contentsline {paragraph}{Decision Tree}{2}{}%
+\contentsline {subsection}{\numberline {4.4}Discussão dos Resultados}{2}{}%
+\contentsline {subsubsection}{\numberline {4.4.1}Interpretação dos Resultados}{2}{}%
+\contentsline {subsubsection}{\numberline {4.4.2}Limitações do Estudo}{2}{}%
+\contentsline {subsubsection}{\numberline {4.4.3}Possíveis Extensões e Trabalhos Futuros}{2}{}%
+\contentsline {section}{\numberline {5}Conclusão}{2}{}%
+\contentsline {section}{\numberline {6}Cronograma do Projeto}{2}{}%
+\contentsline {section}{\numberline {7}Referências}{2}{}%
